@@ -1,3 +1,6 @@
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+
 import torch
 from torch import autocast
 from diffusers import StableDiffusionPipeline, DDIMScheduler
@@ -19,7 +22,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
     ),
 )
 
-def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cpu') -> list:
+def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cuda') -> list:
     ''' Generate images using Stable Deffusion from the prompt
 
         Parameters:
