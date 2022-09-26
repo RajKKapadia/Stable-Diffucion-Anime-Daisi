@@ -19,7 +19,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
     ),
 )
 
-def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cuda') -> list:
+def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cpu') -> list:
     ''' Generate images using Stable Deffusion from the prompt
 
         Parameters:
@@ -42,7 +42,7 @@ def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cu
             generator=generator,
             num_inference_steps=25,
             height=512,
-            width=786
+            width=768
         )
 
     nsfw_content_detected = result.nsfw_content_detected
