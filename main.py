@@ -78,9 +78,8 @@ def st_ui():
         st.write('This is an implementation of the existing work, read more about it [here](https://huggingface.co/blog/stable_diffusion).')
         st.write('The model used in this work can be found [here](https://huggingface.co/hakurei/waifu-diffusion).')
 
-    with st.container():
-        prompt = st.text_input('Paste you prompt here...', value='')
-        button = st.button('Generate image...')
+    prompt = st.sidebar.text_input('Paste you prompt here...', value='')
+    button = st.sidebar.button('Generate image...')
 
     if button:
         if prompt == '':
