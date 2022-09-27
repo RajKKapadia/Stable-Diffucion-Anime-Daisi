@@ -24,11 +24,15 @@ pipeline = StableDiffusionPipeline.from_pretrained(
     ),
 )
 
-def generate_image_from_text(prompt: str, device: str = 'cuda') -> list:
+def generate_image_from_text(prompt: str, guidance_scale: float = 7.0, num_inference_steps: int = 100,  device: str = 'cuda') -> list:
     ''' Generate images using Stable Deffusion from the prompt
 
         Parameters:
         - prompt: str
+        - guidance_scale: float
+            keep it between 7.0 to 8.5
+        - num_inference_steps: int
+            the more the step the better the result, but it will consume more resources
         - device: str
             default value is cuda, if you don't have GPU, you should run it on Google Colab
             The notebook is here - 
@@ -80,6 +84,16 @@ def st_ui():
         st.write('The model used in this work can be found [here](https://huggingface.co/hakurei/waifu-diffusion).')
 
     prompt = st.sidebar.text_input('Paste you prompt here...', value='')
+    guidance_scale = st.sidebar.slider(
+        label='Guidance scale',
+        min_value=7.0,
+        max_value=8.5
+    )
+    num_inference_steps = st.sidebar.slider(
+        label='Number of steps',
+        min_value=25,
+        max_value=300
+    )
     button = st.sidebar.button('Generate image...')
 
     if button:
@@ -88,7 +102,9 @@ def st_ui():
         else:
             with st.spinner('Generating image...'):
                 output = generate_image_from_text(
-                    prompt=prompt
+                    prompt=prompt,
+                    guidance_scale=guidance_scale,
+                    num_inference_steps=num_inference_steps
                 )
                 
                 if not output[0]['unsafe_prompt']:
