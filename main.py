@@ -24,12 +24,11 @@ pipeline = StableDiffusionPipeline.from_pretrained(
     ),
 )
 
-def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cuda') -> list:
+def generate_image_from_text(prompt: str, device: str = 'cuda') -> list:
     ''' Generate images using Stable Deffusion from the prompt
 
         Parameters:
         - prompt: str
-        - num_images: int
         - device: str
             default value is cuda, if you don't have GPU, you should run it on Google Colab
             The notebook is here - 
@@ -42,10 +41,12 @@ def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cu
     generator = torch.Generator(device).manual_seed(SEED)
     with autocast(device):
         result = pipe(
-            [prompt] * num_images,
+            prompt,
             guidance_scale=7.0,
             generator=generator,
-            num_inference_steps=100
+            num_inference_steps=100,
+            height=512,
+            width=768
         )
 
     nsfw_content_detected = result.nsfw_content_detected
