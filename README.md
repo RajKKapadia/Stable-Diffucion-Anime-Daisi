@@ -1,9 +1,10 @@
 # The Very First Daisi™ Hackathon
-This is my attemt to this competition. I have created an appllication that will check toxicity on a piece of text.
+This is my attemt to this competition. I have created an appllication to generate image from a piece of text.
 
 The technology I have used are:
 * [Transformers](https://github.com/huggingface/transformers)
-* [unitary/toxic-bert](https://huggingface.co/unitary/toxic-bert)
+* [Stable Diffusion blog](https://huggingface.co/blog/stable_diffusion)
+* [Waifu Diffusion Model](https://huggingface.co/hakurei/waifu-diffusion)
 
 ## Important links
 * [Competition page](https://www.hackerearth.com/challenges/hackathon/the-very-first-daisitm-hackathon/)

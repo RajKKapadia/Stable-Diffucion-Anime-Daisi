@@ -1,19 +1,18 @@
 # Check Toxicity
 
-This Daisi is a simple application that will return you probabilities of a piece of text being toxic. This application uses the state-of-the-art NLP technology by Unitary with the help of HuggingFace🤗 and Transformers.
+This Daisi is a simple application that will generate image using Stable Diffusion and with the help HuggingFace🤗 and Transformers.
 
 The technology I have used are:
 * [Transformers](https://github.com/huggingface/transformers)
-* [](https://huggingface.co/blog/stable_diffusion)
-* [](https://huggingface.co/hakurei/waifu-diffusion)
+* [Stable Diffusion blog](https://huggingface.co/blog/stable_diffusion)
+* [Waifu Diffusion Model](https://huggingface.co/hakurei/waifu-diffusion)
 
 ```python
 import pydaisi as pyd
 
 stable_diffusion_anime = pyd.Daisi('rajkkapadia/Stable Diffusion Anime')
 output = stable_diffusion_anime.generate_image_from_text(
-    prompt='a dog and a cat playing with each other in a garden during the night',
-    num_images=1
+    prompt='a dog and a cat playing with each other in a garden during the night'
 ).value
 
 print(output)
