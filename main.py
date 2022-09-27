@@ -45,7 +45,7 @@ def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cu
             [prompt] * num_images,
             guidance_scale=7.0,
             generator=generator,
-            num_inference_steps=50
+            num_inference_steps=100
         )
 
     nsfw_content_detected = result.nsfw_content_detected
@@ -82,16 +82,19 @@ def st_ui():
         prompt = st.text_input('Paste you prompt here...', value='')
         button = st.button('Generate image...')
 
-    with st.spinner('Generating image...'):
-        if button:
-            output = generate_image_from_text(
-                prompt=prompt
-            )
-
-            if not output[0]['unsafe_prompt']:
-                st.image(output[0]['image'], 'Generated image')
-            else:
-                st.write('The prompt is unsafe.')
+    if button:
+        if prompt == '':
+            st.write('Please write something in the prompt...')
+        else:
+            with st.spinner('Generating image...'):
+                output = generate_image_from_text(
+                    prompt=prompt
+                )
+                
+                if not output[0]['unsafe_prompt']:
+                    st.image(output[0]['image'], 'Generated image')
+                else:
+                    st.write('The prompt is unsafe.')
 
 if __name__ == '__main__':
     st_ui()
