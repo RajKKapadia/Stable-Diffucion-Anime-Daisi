@@ -1,6 +1,6 @@
 # Check Toxicity
 
-This Daisi is a simple application that will generate image using Stable Diffusion and with the help HuggingFace🤗 and Transformers.
+This Daisi is a simple application that will generate images using Stable Diffusion Anime and with the help HuggingFace🤗 and Transformers.
 
 The technology I have used are:
 * [Transformers](https://github.com/huggingface/transformers)
