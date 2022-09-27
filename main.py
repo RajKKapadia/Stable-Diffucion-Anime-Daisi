@@ -2,6 +2,8 @@ import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 import torch
+torch.cuda.empty_cache()
+
 from torch import autocast
 from diffusers import StableDiffusionPipeline, DDIMScheduler
 import numpy as np
@@ -43,9 +45,7 @@ def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cu
             [prompt] * num_images,
             guidance_scale=7.0,
             generator=generator,
-            num_inference_steps=25,
-            height=512,
-            width=768
+            num_inference_steps=25
         )
 
     nsfw_content_detected = result.nsfw_content_detected
@@ -80,17 +80,18 @@ def st_ui():
 
     with st.container():
         prompt = st.text_input('Paste you prompt here...', value='')
-        button = st.button('Generate images...')
+        button = st.button('Generate image...')
 
-    if button:
-        output = generate_image_from_text(
-            prompt=prompt
-        )
+    with st.spinner('Generating image...'):
+        if button:
+            output = generate_image_from_text(
+                prompt=prompt
+            )
 
-        if not output[0]['unsafe_prompt']:
-            st.image(output[0]['image'], 'Generated image')
-        else:
-            st.write('The prompt is unsafe.')
+            if not output[0]['unsafe_prompt']:
+                st.image(output[0]['image'], 'Generated image')
+            else:
+                st.write('The prompt is unsafe.')
 
 if __name__ == '__main__':
     st_ui()
