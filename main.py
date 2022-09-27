@@ -45,7 +45,7 @@ def generate_image_from_text(prompt: str, num_images: int = 1, device: str = 'cu
             [prompt] * num_images,
             guidance_scale=7.0,
             generator=generator,
-            num_inference_steps=25
+            num_inference_steps=50
         )
 
     nsfw_content_detected = result.nsfw_content_detected
