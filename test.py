@@ -1,8 +1,7 @@
 from main import generate_image_from_text
 
 output = generate_image_from_text(
-    prompt='a dog and a cat playing with each other in a garden during the night',
-    num_images=1
+    prompt='a dog and a cat playing with each other in a garden during the night'
 )
 
 print(output)
