@@ -24,7 +24,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
     ),
 )
 
-def generate_image_from_text(prompt: str, guidance_scale: float = 7.25, num_inference_steps: int = 300,  device: str = 'cuda') -> list:
+def generate_image_from_text(prompt: str, guidance_scale: float = 7.25, num_inference_steps: int = 200,  device: str = 'cuda') -> list:
     ''' Generate images using Stable Deffusion from the prompt
 
         Parameters:
