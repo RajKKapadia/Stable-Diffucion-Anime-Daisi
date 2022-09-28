@@ -10,6 +10,7 @@ import numpy as np
 import streamlit as st
 
 model_id = 'hakurei/waifu-diffusion'
+device = 'cuda'
 
 pipeline = StableDiffusionPipeline.from_pretrained(
     model_id,
@@ -23,6 +24,8 @@ pipeline = StableDiffusionPipeline.from_pretrained(
         set_alpha_to_one=False,
     ),
 )
+
+pipe = pipeline.to(device)
 
 def generate_image_from_text(prompt: str, guidance_scale: float = 7.25, num_inference_steps: int = 200,  device: str = 'cuda') -> list:
     ''' Generate images using Stable Deffusion from the prompt
@@ -40,7 +43,7 @@ def generate_image_from_text(prompt: str, guidance_scale: float = 7.25, num_infe
         Returns:
         - None
     '''
-    pipe = pipeline.to(device)
+    
     SEED = np.random.randint(2022)
     generator = torch.Generator(device).manual_seed(SEED)
     with autocast(device):
