@@ -83,29 +83,16 @@ def st_ui():
         st.write('This is an implementation of the existing work, read more about it [here](https://huggingface.co/blog/stable_diffusion).')
         st.write('The model used in this work can be found [here](https://huggingface.co/hakurei/waifu-diffusion).')
 
-    prompt = st.sidebar.text_input('Paste you prompt here...', value='')
-    guidance_scale = st.sidebar.slider(
-        label='Guidance scale',
-        min_value=7.0,
-        max_value=8.5
-    )
-    num_inference_steps = st.sidebar.slider(
-        label='Number of steps',
-        min_value=25,
-        max_value=300
-    )
-    button = st.sidebar.button('Generate image...')
+    with st.container():
+        prompt = st.text_input('Paste you prompt here...', value='')
+        button = st.button('Generate image...')
 
     if button:
         if prompt == '':
             st.write('Please write something in the prompt...')
         else:
             with st.spinner('Generating image...'):
-                output = generate_image_from_text(
-                    prompt=prompt,
-                    guidance_scale=guidance_scale,
-                    num_inference_steps=num_inference_steps
-                )
+                output = generate_image_from_text(prompt=prompt)
                 
                 if not output[0]['unsafe_prompt']:
                     st.image(output[0]['image'], 'Generated image')
