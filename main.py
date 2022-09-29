@@ -28,20 +28,15 @@ pipeline = StableDiffusionPipeline.from_pretrained(
 pipe = pipeline.to(device)
 
 def generate_image_from_text(prompt: str, guidance_scale: float = 7.25, num_inference_steps: int = 200,  device: str = 'cuda') -> list:
-    ''' Generate images using Stable Deffusion from the prompt
+    '''
+    Generate an anime images using Stable Deffusion from the prompt. This will take a piece of text as an input and returns list of object.
 
-        Parameters:
-        - prompt: str
-        - guidance_scale: float
-            keep it between 7.0 to 8.5
-        - num_inference_steps: int
-            the more the step the better the result, but it will consume more resources
-        - device: str
-            default value is cuda, if you don't have GPU, you should run it on Google Colab
-            The notebook is here - 
+    :param prompt(str): a piece of text used to generate an image
+    :param guidance_scale(float): guidance scale for the Stable Deffusion model, must be between 7.0 to 8.5
+    :param num_inference_steps(int): inference steps for the model, the mode the steps the better the result but this will consume more resources
+    :param device(str): type of hardware to run the model on, use cuda for error free use
 
-        Returns:
-        - None
+    :return list: Returns a list of object, each object has two properties, one unsafe_prompt, either true or false, and two image, a PIL Image object.
     '''
     
     SEED = np.random.randint(2022)
